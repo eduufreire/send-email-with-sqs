@@ -1,9 +1,10 @@
-import { Router } from 'express'
+import { Router, response } from 'express'
+import { registerUserController } from '../useCases/RegisterUser';
 
 const userRoutes = Router();
 
-userRoutes.post('/register', (req, res) => {
-    
+userRoutes.post('/register', (request, response) => {
+    return registerUserController.handle(request, response)
 })
 
 export default userRoutes
