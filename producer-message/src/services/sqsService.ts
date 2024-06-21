@@ -1,24 +1,32 @@
 import { SQSClient, SendMessageCommand } from '@aws-sdk/client-sqs'
+import 'dotenv/config'
 
-export class SqsService {
+export interface ServiceMessage{
+    sendMessage(body: any): Promise<void>
+}
 
-    private client = new SQSClient({region: 'us-east-2'})
+export class SqsService implements ServiceMessage {
 
-    async sendMessage(body: any) {
+    private client = new SQSClient({
+        region: process.env.AWS_DEFAULT_REGION,
+        credentials: {
+            accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        }
+    })
 
+    async sendMessage(body: any): Promise<void> {
         const input = {
-            QueueUrl: "",
+            QueueUrl: process.env.QUEUE_URL,
             MessageBody: JSON.stringify(body)
         }
 
         const command = new SendMessageCommand(input)
-        const response = this.client.send(command)
-
-        return response
+        try{
+            this.client.send(command)
+        }catch(e){
+            console.log(e)
+        }
     }
 
 }
-
-
-
-
