@@ -1,8 +1,8 @@
 import { Consumer } from 'sqs-consumer'
 import 'dotenv/config'
-
 import AWS from 'aws-sdk'
 import { EmailService } from './emailService'
+
 AWS.config.update({
     region: process.env.AWS_DEFAULT_REGION,
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
