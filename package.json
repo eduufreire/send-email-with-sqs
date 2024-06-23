@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "producer": "tsx --watch ./producer-message/server.ts",
-    "consumer": "tsx --watch ./consumer-message/src/services/consumerService.ts"
+    "producer": "tsx --watch ./message-producer/server.ts",
+    "consumer": "tsx --watch ./message-consumer/src/services/consumerService.ts"
   },
   "keywords": [],
   "author": "",
